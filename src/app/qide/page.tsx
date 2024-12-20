@@ -1,13 +1,15 @@
 import { Suspense } from "react";
 
-import GetPosts from "./components/getPosts";
+import GetTitle from "./getTitle";
+import ServerPage from "./serverPage";
 
 export default function Main() {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-        <GetPosts />
+        <GetTitle />
       </Suspense>
+      {/* <ServerPage /> */}
     </>
   );
 }

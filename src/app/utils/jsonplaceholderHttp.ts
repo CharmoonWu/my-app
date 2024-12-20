@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import qs from "qs";
 
 export const BASE_URL = "https://jsonplaceholder.typicode.com";
@@ -17,16 +17,24 @@ export const http = axios.create({
 });
 
 http.interceptors.request.use(async (config) => {
-  //   const token = await localStorage.getItem("Authorization");
-  //   if (token) {
-  //     config.headers = {
-  //       ...config.headers,
-  //       token,
-  //     };
-  //   }
+  const token =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("Authorization")
+      : null;
+  if (token) {
+    config.headers.set("token", token);
+  }
   return config;
 });
 
-http.interceptors.response.use((data) => {
-  return data;
-});
+http.interceptors.response.use(
+  (response: AxiosResponse) => {
+    if (response.status === 200 && response.data) {
+      return response.data;
+    }
+    return response;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
