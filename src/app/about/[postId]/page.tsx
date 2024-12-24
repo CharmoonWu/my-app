@@ -17,7 +17,6 @@ type Props = {
 
 export default function Page() {
   const { postId } = useParams();
-  const [post, setPost] = useState<string | null>(null);
 
   const { data, isPending } = useQuery({
     queryKey: ["todos"],
@@ -28,9 +27,6 @@ export default function Page() {
     enabled: !!postId,
   }) as { data: Props[]; isPending: boolean };
 
-  useEffect(() => {
-    setPost(postId as string);
-  }, [postId]);
 
   if (isPending) return <div>Loading...</div>;
 
