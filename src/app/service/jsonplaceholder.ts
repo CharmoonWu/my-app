@@ -6,4 +6,5 @@ import { http } from "utils/jsonplaceholderHttp";
 export const jsonplaceholderHttp = {
   getPosts: () => http.get("/posts"),
   getComments: (params: any) => http.get(`/comments`, { params }),
+  postPosts: (payload: any) => http.post("/posts", payload),
 };

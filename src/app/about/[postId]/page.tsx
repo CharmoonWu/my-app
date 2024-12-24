@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { Card, CardHeader, CardContent, Typography } from "@mui/material";
@@ -26,7 +25,6 @@ export default function Page() {
       }),
     enabled: !!postId,
   }) as { data: Props[]; isPending: boolean };
-
 
   if (isPending) return <div>Loading...</div>;
 
