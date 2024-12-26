@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
 
 import { Navigation } from "./components/navigation";
 import { Providers } from "./providers";
 
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import theme from "./theme";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -32,17 +25,18 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased relative w-screen h-screen`}
-        >
+        <body className={`antialiased relative w-screen h-screen`}>
           <header className="bg-slate-900 text-white p-4 text-center">
             <Navigation />
           </header>
 
           <Providers>
-            <main className="p-6 w-screen h-[calc(100vh-92px-56px)] overflow-x-hidden overflow-y-auto">
-              {children}
-            </main>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <main className="p-6 w-screen h-[calc(100vh-92px-56px)] overflow-x-hidden overflow-y-auto">
+                {children}
+              </main>
+            </ThemeProvider>
           </Providers>
 
           <footer className="bg-slate-900 text-white p-4 text-center absolute bottom-0 w-full">
