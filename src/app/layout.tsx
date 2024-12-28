@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 
 import { Navigation } from "./components/navigation";
 import { Providers } from "./providers";
@@ -30,14 +31,16 @@ export default function RootLayout({
             <Navigation />
           </header>
 
-          <Providers>
+          <AppRouterCacheProvider options={{ key: "css" }}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <main className="p-6 w-screen h-[calc(100vh-92px-56px)] overflow-x-hidden overflow-y-auto">
-                {children}
-              </main>
+              <Providers>
+                <main className="p-6 w-screen h-[calc(100vh-92px-56px)] overflow-x-hidden overflow-y-auto">
+                  {children}
+                </main>
+              </Providers>
             </ThemeProvider>
-          </Providers>
+          </AppRouterCacheProvider>
 
           <footer className="bg-slate-900 text-white p-4 text-center absolute bottom-0 w-full">
             Codevolution
