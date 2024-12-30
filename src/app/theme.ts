@@ -26,7 +26,7 @@ let theme = createTheme({
   },
 
   typography: {
-    fontFamily: "Lato, sans-serif",
+    fontFamily: "Oswald, sans-serif",
   },
 });
 
